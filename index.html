@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes Patrio - Bandera de México</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #f0f0f0, #dcdcdc);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    header, footer {
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Bandera */
+    .flag-container {
+      display: flex;
+      width: 80%;
+      height: 300px;
+      margin: auto;
+      border: 3px solid #000;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .band {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.5s ease;
+    }
+
+    #green {
+      background-color: rgb(0, 104, 71); /* Verde bandera */
+    }
+
+    .white {
+      background-color: white;
+      position: relative;
+    }
+
+    #red {
+      background-color: rgb(206, 17, 38); /* Rojo bandera */
+    }
+
+    .escudo {
+      max-height: 80%;
+      max-width: 80%;
+    }
+
+    /* Controles */
+    .controls label {
+      font-weight: bold;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .controls input[type="range"] {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header class="bg-dark text-white text-center py-3">
+    <h1>Bandera de México</h1>
+    <p class="mb-0">Proyecto académico - Ingeniería en Sistemas Computacionales</p>
+  </header>
+
+  <!-- Contenedor de bandera -->
+  <main class="container text-center my-5">
+    <div class="flag-container shadow-lg">
+      <!-- Verde -->
+      <div id="green" class="band"></div>
+
+      <!-- Blanco con escudo -->
+      <div class="band white">
+        <img src="https://img.freepik.com/vector-premium/bandera-mexico-aguila-serpiente_102026-11.jpg" alt="Escudo de México" class="escudo">
+      </div>
+
+      <!-- Rojo -->
+      <div id="red" class="band"></div>
+    </div>
+
+    <!-- Controles -->
+    <section class="controls mt-4">
+      <div class="row">
+        <div class="col-md-6">
+          <label for="greenRange">Verde (Esperanza)</label>
+          <input type="range" min="0" max="255" id="greenRange" value="104" class="form-range">
+          <p id="greenHex" class="fw-bold">RGB(0,104,71) | #006847</p>
+        </div>
+        <div class="col-md-6">
+          <label for="redRange">Rojo (Sangre de nuestros héroes)</label>
+          <input type="range" min="0" max="255" id="redRange" value="206" class="form-range">
+          <p id="redHex" class="fw-bold">RGB(206,17,38) | #CE1126</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Integrantes -->
+    <section class="mt-5">
+      <h3>Integrantes</h3>
+      <table class="table table-striped table-bordered w-75 mx-auto shadow">
+        <thead class="table-dark">
+          <tr>
+            <th>Nombre</th>
+            <th>Número de Control</th>
+            <th>Carrera</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Enrique Gomez Orta</td>
+            <td>23200842</td>
+            <td>ISC</td>
+          </tr>
+          <tr>
+            <td>Cesar Estrada Flores</td>
+            <td>23200832</td>
+            <td>ISC</td>
+          </tr>
+          <tr>
+            <td>Emilio Sebastián Fernandez</td>
+            <td>23200835</td>
+            <td>ISC</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3 mt-5">
+    <p class="mb-0">&copy; 2025 Equipo ISC | Todos los derechos reservados</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const greenRange = document.getElementById('greenRange');
+      const greenBox = document.getElementById('green');
+      const greenHex = document.getElementById('greenHex');
+
+      const redRange = document.getElementById('redRange');
+      const redBox = document.getElementById('red');
+      const redHex = document.getElementById('redHex');
+
+      function rgbToHex(r, g, b) {
+        return "#" + [r, g, b]
+          .map(x => x.toString(16).padStart(2, '0'))
+          .join('')
+          .toUpperCase();
+      }
+
+      function updateGreenBox() {
+        const g = parseInt(greenRange.value);
+        const rgb = `rgb(0, ${g}, 71)`;
+        const hex = rgbToHex(0, g, 71);
+        greenBox.style.backgroundColor = rgb;
+        greenHex.textContent = `${rgb} | ${hex}`;
+      }
+
+      function updateRedBox() {
+        const r = parseInt(redRange.value);
+        const rgb = `rgb(${r}, 17, 38)`;
+        const hex = rgbToHex(r, 17, 38);
+        redBox.style.backgroundColor = rgb;
+        redHex.textContent = `${rgb} | ${hex}`;
+      }
+
+      greenRange.addEventListener('input', updateGreenBox);
+      redRange.addEventListener('input', updateRedBox);
+
+      updateGreenBox();
+      updateRedBox();
+    });
+  </script>
+</body>
+</html>
